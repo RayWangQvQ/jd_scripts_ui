@@ -1,0 +1,21 @@
+﻿@page "/customshell"
+
+<link rel="stylesheet" href="css/codemirror.css">
+
+<h3>CustomShell</h3>
+
+<div class="form-group col-12">
+    <label class="control-label">内容</label>
+    <Textarea placeholder="请输入 ..." rows="4" @bind-Value="@this.Code"></Textarea>
+</div>
+
+<div>
+    <Button @onclick="@Refresh">刷新文件内容</Button>
+</div>
+
+@code {
+    private async Task Refresh()
+    {
+        this.Code = await this.GetContent();
+    }
+}
