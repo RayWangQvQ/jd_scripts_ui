@@ -1,4 +1,4 @@
-using BootstrapBlazorApp.Shared;
+﻿using BootstrapBlazorApp.Shared;
 using BootstrapBlazorApp.Shared.Data;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +24,7 @@ namespace BootstrapBlazorApp.WebAssembly
 
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri("http://localhost:5000") });
 
             // 增加 BootstrapBlazor 组件
             builder.Services.AddBootstrapBlazor();

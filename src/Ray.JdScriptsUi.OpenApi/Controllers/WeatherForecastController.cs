@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 
 namespace Ray.JdScriptsUi.OpenApi.Controllers
@@ -34,6 +36,24 @@ namespace Ray.JdScriptsUi.OpenApi.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [Route("test")]
+        [HttpGet]
+        public async Task<string> Test()
+        {
+            var re = "";
+
+            IFileProvider fileProvider = new PhysicalFileProvider(@"G:\DockerContainers\jd_scripts\jd_scripts_bak");
+
+            IFileInfo fileInfo = fileProvider.GetFileInfo("index.js");
+
+            using (StreamReader readSteam = new StreamReader(fileInfo.CreateReadStream()))
+            {
+                re = await readSteam.ReadToEndAsync();
+            }
+
+            return re;
         }
     }
 }
